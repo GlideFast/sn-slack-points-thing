@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="8e19bfa9dbad370076108d3748961945" sys_domain="global" table="x_snc_slack_points_random_message" version="3" view="">
+        <sys_ui_annotation action="INSERT_OR_UPDATE">
+            <is_plain_text>true</is_plain_text>
+            <sys_created_by>Dennis.Bennett</sys_created_by>
+            <sys_created_on>2019-05-21 14:35:27</sys_created_on>
+            <sys_id>de7c37eddbad370076108d37489619b9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Dennis.Bennett</sys_updated_by>
+            <sys_updated_on>2019-05-21 14:35:27</sys_updated_on>
+            <text>Messages must contain {user} and {points} to refer to the user receiving points and the amount of total points the user now has.</text>
+            <type display_value="Info Box Blue">753f88a80f930000b12e6903cfe01206</type>
+        </sys_ui_annotation>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>de7c37eddbad370076108d37489619b9</element>
+            <position>0</position>
+            <sys_created_by>Dennis.Bennett</sys_created_by>
+            <sys_created_on>2019-05-21 14:35:27</sys_created_on>
+            <sys_id>567c77eddbad370076108d3748961939</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_snc_slack_points_random_message" sys_domain="global" view="Default view">8e19bfa9dbad370076108d3748961945</sys_ui_section>
+            <sys_updated_by>Dennis.Bennett</sys_updated_by>
+            <sys_updated_on>2019-05-21 14:35:27</sys_updated_on>
+            <sys_user/>
+            <type>annotation</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>message</element>
+            <position>1</position>
+            <sys_created_by>Dennis.Bennett</sys_created_by>
+            <sys_created_on>2019-05-21 14:35:27</sys_created_on>
+            <sys_id>da7c77eddbad370076108d3748961939</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_snc_slack_points_random_message" sys_domain="global" view="Default view">8e19bfa9dbad370076108d3748961945</sys_ui_section>
+            <sys_updated_by>Dennis.Bennett</sys_updated_by>
+            <sys_updated_on>2019-05-21 14:35:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.begin_split</element>
+            <position>2</position>
+            <sys_created_by>Dennis.Bennett</sys_created_by>
+            <sys_created_on>2019-05-21 14:35:27</sys_created_on>
+            <sys_id>5e7c77eddbad370076108d3748961939</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_snc_slack_points_random_message" sys_domain="global" view="Default view">8e19bfa9dbad370076108d3748961945</sys_ui_section>
+            <sys_updated_by>Dennis.Bennett</sys_updated_by>
+            <sys_updated_on>2019-05-21 14:35:27</sys_updated_on>
+            <sys_user/>
+            <type>.begin_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>active</element>
+            <position>3</position>
+            <sys_created_by>Dennis.Bennett</sys_created_by>
+            <sys_created_on>2019-05-21 14:35:27</sys_created_on>
+            <sys_id>de7c77eddbad370076108d3748961939</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_snc_slack_points_random_message" sys_domain="global" view="Default view">8e19bfa9dbad370076108d3748961945</sys_ui_section>
+            <sys_updated_by>Dennis.Bennett</sys_updated_by>
+            <sys_updated_on>2019-05-21 14:35:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>4</position>
+            <sys_created_by>Dennis.Bennett</sys_created_by>
+            <sys_created_on>2019-05-21 14:35:27</sys_created_on>
+            <sys_id>527c77eddbad370076108d374896193a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_snc_slack_points_random_message" sys_domain="global" view="Default view">8e19bfa9dbad370076108d3748961945</sys_ui_section>
+            <sys_updated_by>Dennis.Bennett</sys_updated_by>
+            <sys_updated_on>2019-05-21 14:35:27</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.end_split</element>
+            <position>5</position>
+            <sys_created_by>Dennis.Bennett</sys_created_by>
+            <sys_created_on>2019-05-21 14:35:27</sys_created_on>
+            <sys_id>d27c77eddbad370076108d374896193a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_snc_slack_points_random_message" sys_domain="global" view="Default view">8e19bfa9dbad370076108d3748961945</sys_ui_section>
+            <sys_updated_by>Dennis.Bennett</sys_updated_by>
+            <sys_updated_on>2019-05-21 14:35:27</sys_updated_on>
+            <sys_user/>
+            <type>.end_split</type>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_snc_slack_points_random_message</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>Dennis.Bennett</sys_created_by>
+            <sys_created_on>2019-05-21 14:20:41</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>8e19bfa9dbad370076108d3748961945</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_snc_slack_points_random_message</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Slack Points Thing" source="x_snc_slack_points">4f6df3c813444f009718b9b76144b02c</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Slack Points Thing">4f6df3c813444f009718b9b76144b02c</sys_scope>
+            <sys_update_name>sys_ui_section_8e19bfa9dbad370076108d3748961945</sys_update_name>
+            <sys_updated_by>Dennis.Bennett</sys_updated_by>
+            <sys_updated_on>2019-05-21 14:20:41</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

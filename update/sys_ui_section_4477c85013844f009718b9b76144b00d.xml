@@ -3,98 +3,126 @@
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>.begin_split</element>
             <position>0</position>
-            <sys_created_by>josh.nerius</sys_created_by>
-            <sys_created_on>2017-08-23 21:20:41</sys_created_on>
-            <sys_id>95168ac913700f00973e70d66144b06c</sys_id>
+            <sys_created_by>Dennis.Bennett</sys_created_by>
+            <sys_created_on>2019-05-20 19:12:42</sys_created_on>
+            <sys_id>3552771ddb25370076108d3748961922</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_snc_slack_points_slack_user" sys_domain="global" view="Default view">4477c85013844f009718b9b76144b00d</sys_ui_section>
-            <sys_updated_by>josh.nerius</sys_updated_by>
-            <sys_updated_on>2017-08-23 21:20:41</sys_updated_on>
+            <sys_updated_by>Dennis.Bennett</sys_updated_by>
+            <sys_updated_on>2019-05-20 19:12:42</sys_updated_on>
             <sys_user/>
             <type>.begin_split</type>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>user_id</element>
             <position>1</position>
-            <sys_created_by>josh.nerius</sys_created_by>
-            <sys_created_on>2017-08-23 21:20:41</sys_created_on>
-            <sys_id>19168ac913700f00973e70d66144b06c</sys_id>
+            <sys_created_by>Dennis.Bennett</sys_created_by>
+            <sys_created_on>2019-05-20 19:12:42</sys_created_on>
+            <sys_id>b552771ddb25370076108d3748961922</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_snc_slack_points_slack_user" sys_domain="global" view="Default view">4477c85013844f009718b9b76144b00d</sys_ui_section>
-            <sys_updated_by>josh.nerius</sys_updated_by>
-            <sys_updated_on>2017-08-23 21:20:41</sys_updated_on>
+            <sys_updated_by>Dennis.Bennett</sys_updated_by>
+            <sys_updated_on>2019-05-20 19:12:42</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>user_name</element>
             <position>2</position>
-            <sys_created_by>josh.nerius</sys_created_by>
-            <sys_created_on>2017-08-23 21:20:41</sys_created_on>
-            <sys_id>99168ac913700f00973e70d66144b06c</sys_id>
+            <sys_created_by>Dennis.Bennett</sys_created_by>
+            <sys_created_on>2019-05-20 19:12:42</sys_created_on>
+            <sys_id>3952771ddb25370076108d3748961922</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_snc_slack_points_slack_user" sys_domain="global" view="Default view">4477c85013844f009718b9b76144b00d</sys_ui_section>
-            <sys_updated_by>josh.nerius</sys_updated_by>
-            <sys_updated_on>2017-08-23 21:20:41</sys_updated_on>
+            <sys_updated_by>Dennis.Bennett</sys_updated_by>
+            <sys_updated_on>2019-05-20 19:12:42</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>user_email</element>
+            <position>3</position>
+            <sys_created_by>Dennis.Bennett</sys_created_by>
+            <sys_created_on>2019-05-20 19:12:42</sys_created_on>
+            <sys_id>b952771ddb25370076108d3748961922</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_snc_slack_points_slack_user" sys_domain="global" view="Default view">4477c85013844f009718b9b76144b00d</sys_ui_section>
+            <sys_updated_by>Dennis.Bennett</sys_updated_by>
+            <sys_updated_on>2019-05-20 19:12:42</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>.split</element>
-            <position>3</position>
-            <sys_created_by>josh.nerius</sys_created_by>
-            <sys_created_on>2017-08-23 21:20:41</sys_created_on>
-            <sys_id>1d168ac913700f00973e70d66144b06c</sys_id>
+            <position>4</position>
+            <sys_created_by>Dennis.Bennett</sys_created_by>
+            <sys_created_on>2019-05-20 19:12:42</sys_created_on>
+            <sys_id>3d52771ddb25370076108d3748961922</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_snc_slack_points_slack_user" sys_domain="global" view="Default view">4477c85013844f009718b9b76144b00d</sys_ui_section>
-            <sys_updated_by>josh.nerius</sys_updated_by>
-            <sys_updated_on>2017-08-23 21:20:41</sys_updated_on>
+            <sys_updated_by>Dennis.Bennett</sys_updated_by>
+            <sys_updated_on>2019-05-20 19:12:42</sys_updated_on>
             <sys_user/>
             <type>.split</type>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>points</element>
-            <position>4</position>
-            <sys_created_by>josh.nerius</sys_created_by>
-            <sys_created_on>2017-08-23 21:20:41</sys_created_on>
-            <sys_id>9d168ac913700f00973e70d66144b06c</sys_id>
+            <element>user</element>
+            <position>5</position>
+            <sys_created_by>Dennis.Bennett</sys_created_by>
+            <sys_created_on>2019-05-20 19:12:42</sys_created_on>
+            <sys_id>bd52771ddb25370076108d3748961922</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_snc_slack_points_slack_user" sys_domain="global" view="Default view">4477c85013844f009718b9b76144b00d</sys_ui_section>
-            <sys_updated_by>josh.nerius</sys_updated_by>
-            <sys_updated_on>2017-08-23 21:20:41</sys_updated_on>
+            <sys_updated_by>Dennis.Bennett</sys_updated_by>
+            <sys_updated_on>2019-05-20 19:12:42</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>points</element>
+            <position>6</position>
+            <sys_created_by>Dennis.Bennett</sys_created_by>
+            <sys_created_on>2019-05-20 19:12:42</sys_created_on>
+            <sys_id>3152771ddb25370076108d3748961923</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_snc_slack_points_slack_user" sys_domain="global" view="Default view">4477c85013844f009718b9b76144b00d</sys_ui_section>
+            <sys_updated_by>Dennis.Bennett</sys_updated_by>
+            <sys_updated_on>2019-05-20 19:12:42</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>other_points</element>
-            <position>5</position>
-            <sys_created_by>josh.nerius</sys_created_by>
-            <sys_created_on>2017-08-23 21:20:41</sys_created_on>
-            <sys_id>11168ac913700f00973e70d66144b06d</sys_id>
+            <position>7</position>
+            <sys_created_by>Dennis.Bennett</sys_created_by>
+            <sys_created_on>2019-05-20 19:12:42</sys_created_on>
+            <sys_id>b152771ddb25370076108d3748961923</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_snc_slack_points_slack_user" sys_domain="global" view="Default view">4477c85013844f009718b9b76144b00d</sys_ui_section>
-            <sys_updated_by>josh.nerius</sys_updated_by>
-            <sys_updated_on>2017-08-23 21:20:41</sys_updated_on>
+            <sys_updated_by>Dennis.Bennett</sys_updated_by>
+            <sys_updated_on>2019-05-20 19:12:42</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>.end_split</element>
-            <position>6</position>
-            <sys_created_by>josh.nerius</sys_created_by>
-            <sys_created_on>2017-08-23 21:20:41</sys_created_on>
-            <sys_id>91168ac913700f00973e70d66144b06d</sys_id>
+            <position>8</position>
+            <sys_created_by>Dennis.Bennett</sys_created_by>
+            <sys_created_on>2019-05-20 19:12:42</sys_created_on>
+            <sys_id>3552771ddb25370076108d3748961923</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_snc_slack_points_slack_user" sys_domain="global" view="Default view">4477c85013844f009718b9b76144b00d</sys_ui_section>
-            <sys_updated_by>josh.nerius</sys_updated_by>
-            <sys_updated_on>2017-08-23 21:20:41</sys_updated_on>
+            <sys_updated_by>Dennis.Bennett</sys_updated_by>
+            <sys_updated_on>2019-05-20 19:12:42</sys_updated_on>
             <sys_user/>
             <type>.end_split</type>
         </sys_ui_element>

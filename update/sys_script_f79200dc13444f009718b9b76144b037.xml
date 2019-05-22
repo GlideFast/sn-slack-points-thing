@@ -28,66 +28,83 @@
         <rest_variables/>
         <role_conditions/>
         <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
-	
+
 	// TODO: Move this logic into a Script Include
 	var payloadObject = JSON.parse(current.payload); 
-	
+
 	// DO NOT process bot messages
 	if (payloadObject.event.subtype == 'bot_message') {
 		return; 
 	}
-	
+
 	var matches = payloadObject.event.text.match(/\s?\@?(\S+)\s?\+\+/g); 
-	
+
 	matches.forEach(function (t) {
 		var thing = t.replace('++', ''); 
 		thing = thing.trim();
-		
+
 		// Check for self-points
 		if (thing.contains(payloadObject.event.user)) {
+			//Send self points error
+			sendResponse(gs.getMessage('self_points_error'),gs.getProperty('x_snc_slack_points.post_ephemeral_url'),payloadObject,payloadObject.event.user);
 			return; 
 		}
-		
+
 		var grSlackUser = new GlideRecord('x_snc_slack_points_slack_user'); 
 		grSlackUser.addQuery('user_id', thing); 
 		grSlackUser.query(); 
 
 		if (grSlackUser.next()) {
-			grSlackUser.points = grSlackUser.points + 1;  
+			grSlackUser.points = grSlackUser.points + 1;
 			grSlackUser.update(); 
 		} else {
-			grSlackUser.initialize(); 
-			grSlackUser.user_id = thing; 
-			grSlackUser.points = 1; 
-			grSlackUser.insert(); 
+			var slack = new SlackClient(); 
+			var userInfo = slack.getUserInfo(thing.replace('<', '').replace('>', '').replace('@', ''));
+			if(userInfo.ok){
+				grSlackUser.initialize(); 
+				grSlackUser.user_id = thing;
+				grSlackUser.user_name = userInfo.user.name;
+				grSlackUser.user_email = userInfo.user.profile.email;
+				grSlackUser.points = 1; 
+				grSlackUser.insert();
+			}
+			else{
+				var user_not_found_msg = gs.getMessage('user_not_found_error',thing);
+				sendResponse(user_not_found_msg,gs.getProperty('x_snc_slack_points.post_ephemeral_url'),payloadObject,payloadObject.event.user);
+				return;
+			}
 		}
 
+		//Send new points message
+		var randomMessage = new x_snc_slack_points.RandomMessage();
+		sendResponse(gs.urlEncode(randomMessage.getMessage(thing, grSlackUser.points)),gs.getProperty('x_snc_slack_points.post_message_url'),payloadObject);
+	}); 
+
+	// var userId = payloadObject.event.text.match(/\s?\@?(\S+)\s?\+\+/)[1]; 
+
+	function sendResponse(message,endpoint,payload,user){
 		var rm = new sn_ws.RESTMessageV2();
 		rm.setLogLevel('all');
 		rm.setHttpMethod('POST');
 		rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); 
-		rm.setEndpoint('https://slack.com/api/chat.postMessage');
+		rm.setEndpoint(endpoint);
 
 		var bodyString = '';
 		bodyString += 'token=' + gs.urlEncode(gs.getProperty('x_snc_slack_points.slack_bot_token')); 
-		bodyString += '&channel=' + gs.urlEncode(payloadObject.event.channel);
-		
-		if (payloadObject.event.thread_ts) {
-			bodyString += '&thread_ts=' + gs.urlEncode(payloadObject.event.thread_ts); 
+		bodyString += '&channel=' + gs.urlEncode(payload.event.channel);
+		if (payload.event.thread_ts) {
+			bodyString += '&thread_ts=' + gs.urlEncode(payload.event.thread_ts); 
 		}
-		
-		//bodyString += '&text=' + gs.urlEncode('Congrats ' + thing + ' you now have ' + grSlackUser.points + ' points'); 
-       var randomMessage = new x_snc_slack_points.RandomMessage();
-	   bodyString += '&text=' + gs.urlEncode(randomMessage.getMessage(thing, grSlackUser.points));
-		
-		
+		if(user){
+			bodyString += '&user=' + user;
+		}
+		bodyString += '&text=' + message;
+
 		rm.setRequestBody(bodyString);
 		var response = rm.execute();
 		var responseBody = response.getBody();
 		var statusCode = response.getStatusCode();
-	}); 
-	
-	// var userId = payloadObject.event.text.match(/\s?\@?(\S+)\s?\+\+/)[1]; 
+	}
 
 })(current, previous);]]></script>
         <sys_class_name>sys_script</sys_class_name>
@@ -96,15 +113,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>f79200dc13444f009718b9b76144b037</sys_id>
-        <sys_mod_count>37</sys_mod_count>
+        <sys_mod_count>42</sys_mod_count>
         <sys_name>Process Points</sys_name>
         <sys_overrides/>
         <sys_package display_value="Slack Points Thing" source="x_snc_slack_points">4f6df3c813444f009718b9b76144b02c</sys_package>
         <sys_policy/>
         <sys_scope display_value="Slack Points Thing">4f6df3c813444f009718b9b76144b02c</sys_scope>
         <sys_update_name>sys_script_f79200dc13444f009718b9b76144b037</sys_update_name>
-        <sys_updated_by>tgbates</sys_updated_by>
-        <sys_updated_on>2017-10-20 22:28:54</sys_updated_on>
+        <sys_updated_by>Dennis.Bennett</sys_updated_by>
+        <sys_updated_on>2019-05-21 14:07:45</sys_updated_on>
         <template/>
         <when>async</when>
     </sys_script>

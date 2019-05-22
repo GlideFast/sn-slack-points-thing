@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml,application/x-www-form-urlencoded</consumes>
+        <consumes_customized>true</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>POST</http_method>
+        <name>Handle Slash Command</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+	
+	response.setStatus(200);
+	response.setContentType('text/plain');
+	
+	var qp = request.queryParams;
+	var text = qp.text+'';
+	text.trim();
+	if(text == '' || (text != 'top20' && text != 'top50')){
+		response.getStreamWriter().writeString('Accepted parameters:\ntop20\ntop50');
+	}
+	else{
+		var topResp = new PointCalculator().getTop(text);
+		gs.info(JSON.stringify(topResp));
+		if(topResp.success){
+			response.getStreamWriter().writeString(topResp.message);
+		}
+		else{
+			response.getStreamWriter().writeString('Command was either invalid or returned no results.');
+		}
+	}
+
+    /*if (request.body.data.challenge) {
+		response.setStatus(200); 
+		response.setContentType('text/plain');
+		response.getStreamWriter().writeString(request.body.data.challenge); 
+	} else {
+		if (request.body.data.event.text.contains('++')) {
+			var grSlackEvent = new GlideRecord('x_snc_slack_points_slack_event'); 
+			grSlackEvent.initialize(); 
+			grSlackEvent.payload = JSON.stringify(request.body.data, null, 2); 
+			grSlackEvent.insert(); 
+		}
+	}*/
+
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_snc_slack_points/handle_slack_events/command</operation_uri>
+        <produces>application/json,application/xml,text/xml,text/plain</produces>
+        <produces_customized>true</produces_customized>
+        <relative_path>/command</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>false</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>Dennis.Bennett</sys_created_by>
+        <sys_created_on>2019-05-22 13:27:31</sys_created_on>
+        <sys_id>dc06f442dbe9770076108d374896195b</sys_id>
+        <sys_mod_count>16</sys_mod_count>
+        <sys_name>Handle Slash Command</sys_name>
+        <sys_package display_value="Slack Points Thing" source="x_snc_slack_points">4f6df3c813444f009718b9b76144b02c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Slack Points Thing">4f6df3c813444f009718b9b76144b02c</sys_scope>
+        <sys_update_name>sys_ws_operation_dc06f442dbe9770076108d374896195b</sys_update_name>
+        <sys_updated_by>Dennis.Bennett</sys_updated_by>
+        <sys_updated_on>2019-05-22 17:55:43</sys_updated_on>
+        <web_service_definition display_value="Handle Slack Events">ad8db7c813444f009718b9b76144b05d</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>
