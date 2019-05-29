@@ -4,8 +4,8 @@
         <element label="Points" max_length="40" name="points" type="integer"/>
         <element label="User" max_length="32" name="user" reference="sys_user" type="reference"/>
         <element attributes="edge_encryption_enabled=true" label="Slack User Email" max_length="100" name="user_email" type="string"/>
-        <element display="true" label="Slack User ID" max_length="40" name="user_id" type="string"/>
-        <element label="Slack User Name" max_length="40" name="user_name" type="string"/>
+        <element label="Slack User ID" max_length="40" name="user_id" type="string"/>
+        <element display="true" label="Slack User Name" max_length="40" name="user_name" type="string"/>
         <index name="index">
             <element name="user"/>
         </index>

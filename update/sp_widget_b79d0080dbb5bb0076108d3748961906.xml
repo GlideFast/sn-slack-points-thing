@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+  /* widget controller */
+  var c = this;
+	
+	c.pageChanged = function(){
+		c.server.update();
+	}
+	
+	c.highlightClass = function(sys_user_id,user){
+		if(sys_user_id == user){
+			return 'info';
+		}
+		else{
+			return '';
+		}
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>slack_points_leaderboard</id>
+        <internal>false</internal>
+        <link/>
+        <name>Slack Points Leaderboard</name>
+        <option_schema>[{"name":"time_frame","section":"Data","default_value":"","label":"Time Frame","type":"choice","choices":[{"label":"All Time","value":"All Time"},{"label":"This Month","value":"This Month"},{"label":"Last Month","value":"Last Month"},{"label":"Last 30 Days","value":"Last 30 Days"},{"label":"Last 60 Days","value":"Last 60 Days"},{"label":"Last 90 Days","value":"Last 90 Days"},{"label":"This Year","value":"This Year"},{"label":"Last Year","value":"Last Year"}]},{"name":"title","section":"Presentation","label":"Title","type":"string"},{"name":"per_page","section":"Behavior","label":"Rows per page","type":"integer"},{"name":"display","section":"Presentation","label":"Display","type":"choice","choices":[{"label":"List","value":"List"},{"label":"Pie Chart","value":"Pie Chart"}]}]</option_schema>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
+	data.title = options.title || 'Points Leaders';
+	data.per_page = options.per_page || 20;
+	data.user = gs.getUserID();
+	data.display = options.display || 'List';
+
+	if(!input){
+		data.page = 1;
+		data.start = getStart(data.page,data.per_page);
+		if(!options.time_frame || options.time_frame == 'All Time'){
+			data.userPoints = new PointCalculator().getTop();
+			if(data.display == 'Pie Chart'){
+				data.chartData = getChartData(data.userPoints);
+			}
+		}
+		else{
+			var time_frame = getTimeFrame(options.time_frame);
+			data.userPoints = new PointCalculator().getTop(time_frame.start,time_frame.end);
+			if(data.display == 'Pie Chart'){
+				data.chartData = getChartData(data.userPoints);
+			}
+		}
+		data.total = data.userPoints.length;
+	}
+
+	if(input){
+		data.page = input.page;
+		data.start = getStart(data.page,data.per_page);
+	}
+
+	function getStart(page,per_page){
+		return (page * per_page) - per_page;
+	}
+
+	function getTimeFrame(tf){
+		var returnObj = {};
+		switch(tf){
+
+			case 'This Month':
+				returnObj.start = gs.beginningOfThisMonth();
+				returnObj.end = gs.endOfThisMonth();
+				break;
+
+			case 'Last Month':
+				returnObj.start = gs.beginningOfLastMonth();
+				returnObj.end = gs.endOfLastMonth();
+				break;
+
+			case 'Last 30 Days':
+				returnObj.start = getDateDaysAgo(30);
+				returnObj.end = gs.now();
+				break;
+
+			case 'Last 60 Days':
+				returnObj.start = getDateDaysAgo(60);
+				returnObj.end = gs.now();
+				break;
+
+			case 'Last 90 Days':
+				returnObj.start = getDateDaysAgo(90);
+				returnObj.end = gs.now();
+				break;
+
+			case 'This Year':
+				returnObj.start = gs.beginningOfThisYear();
+				returnObj.end = gs.endOfThisYear();
+				break;
+
+			case 'Last Year':
+				returnObj.start = gs.beginningOfLastYear();
+				returnObj.end = gs.endOfLastYear();
+				break;
+		}
+		return returnObj;
+	}
+	
+	function getDateDaysAgo(num){
+		var gdt = new GlideDateTime();
+		gdt.addDaysLocalTime(num*-1);
+		return gdt.getLocalDate();
+	}
+	
+	function getChartData(userPoints){
+		var len = userPoints.length;
+		var chartData = {};
+		chartData.labels = [];
+		chartData.data = [];
+		chartData.options = {};
+		
+		for(var i = 0; i < len; i++){
+			chartData.labels.push(userPoints[i].user + ' (' + userPoints[i].slack_user + ')');
+			chartData.data.push(userPoints[i].points);
+		}
+		
+		return chartData;
+	}
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Dennis.Bennett</sys_created_by>
+        <sys_created_on>2019-05-28 15:36:42</sys_created_on>
+        <sys_id>b79d0080dbb5bb0076108d3748961906</sys_id>
+        <sys_mod_count>57</sys_mod_count>
+        <sys_name>Slack Points Leaderboard</sys_name>
+        <sys_package display_value="Slack Points Thing" source="x_snc_slack_points">4f6df3c813444f009718b9b76144b02c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Slack Points Thing">4f6df3c813444f009718b9b76144b02c</sys_scope>
+        <sys_update_name>sp_widget_b79d0080dbb5bb0076108d3748961906</sys_update_name>
+        <sys_updated_by>Dennis.Bennett</sys_updated_by>
+        <sys_updated_on>2019-05-29 17:48:27</sys_updated_on>
+        <template><![CDATA[<div>
+  <div class="panel panel-default">
+    <div class="panel-heading">{{data.title}}</div>
+    <div class="panel-body">
+      <div ng-if="data.display == 'List'">
+        <table class="table table-striped table-responsive">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Slack User</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="userPoint in data.userPoints | limitTo: data.per_page:data.start" ng-class="c.highlightClass(userPoint.sys_user_id,data.user)">
+              <td>{{userPoint.number}}</td>
+              <td>{{userPoint.user}}</td>
+              <td>{{userPoint.slack_user}}</td>
+              <td>{{userPoint.points}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <uib-pagination total-items="data.total" items-per-page="data.per_page" ng-model="data.page" ng-change="c.pageChanged()"></uib-pagination>
+      </div>
+      <div ng-if="data.display == 'Pie Chart'">
+        <canvas id="leader_pie_chart" class="chart chart-pie" chart-data="c.data.chartData.data" chart-labels="c.data.chartData.labels" chart-options="c.data.chartData.options"></canvas>
+      </div>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

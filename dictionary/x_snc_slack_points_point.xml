@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element label="Slack Point" max_length="40" name="x_snc_slack_points_point" type="collection">
-        <element label="Giver" max_length="40" name="giver" type="string"/>
+        <element default="javascript:gs.now()" dynamic_default_value="fb7553e85f220100a9ad2572f2b477b4" label="Date Given" max_length="40" name="date_given" type="glide_date" use_dynamic_default="true"/>
+        <element label="Giver Slack User" max_length="40" name="giver" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Giver Slack User Email" max_length="100" name="giver_slack_user_email" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Giver Slack User Name" max_length="100" name="giver_slack_user_name" type="string"/>
+        <element label="Giver User" max_length="32" name="giver_user" reference="sys_user" type="reference"/>
         <element label="Source event" max_length="32" name="source_event" reference="x_snc_slack_points_slack_event" type="reference"/>
-        <element label="Target" max_length="40" name="target" reference="x_snc_slack_points_slack_user" type="reference"/>
+        <element label="Target Slack User" max_length="40" name="target" reference="x_snc_slack_points_slack_user" type="reference"/>
         <element label="Text" max_length="400" name="text" type="string"/>
         <index name="index">
-            <element name="source_event"/>
+            <element name="giver_user"/>
         </index>
         <index name="index2">
+            <element name="source_event"/>
+        </index>
+        <index name="index3">
             <element name="target"/>
         </index>
     </element>

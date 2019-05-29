@@ -8,16 +8,16 @@
         <name>PointCalculator</name>
         <script><![CDATA[var PointCalculator = Class.create();
 PointCalculator.prototype = {
-	
-    initialize: function(userGR) {
+
+	initialize: function(userGR) {
 		this.user = userGR;
-    },
-	
+	},
+
 	syncPointsToUserRecord: function() {
 		this.user.points = this.calculate(); 
 		this.user.update(); 
 	}, 
-	
+
 	calculate: function() {
 		var userID = this.user.getUniqueValue(); 
 		var gaPoints = new GlideAggregate('x_snc_slack_points_point');
@@ -31,8 +31,8 @@ PointCalculator.prototype = {
 			return 0;
 		}
 	},
-	
-	getTop: function(text){
+
+	getTopForSlack: function(text){
 		var returnObj = {};
 		returnObj.success = false;
 		returnObj.message = '';
@@ -54,23 +54,92 @@ PointCalculator.prototype = {
 				returnObj.message += top.user.getDisplayValue() + ': ' + top.points;
 			}
 		}
-		
+
 		return returnObj;
 	},
 
-    type: 'PointCalculator'
+	/**
+
+	* Description: getTop is used to get the top point receivers overall or for a given period of time for display on the portal
+
+	* Parameters:
+		startDate (optional dateTime)
+		endDate (optional dateTime)
+		
+		If startDate is not present, endDate is irrelevant and "all time" numbers will be used
+
+	* Returns:
+		returnObj (array of objects containing User's Name [user], User's Slack User Name [slack_user], Users' Points [points])
+	*/
+
+	getTop: function(startDate,endDate){
+		var returnObj = [];
+		
+		if(!startDate){
+			returnObj = this._getTopNoTimeFrame();
+		}
+		else{
+			returnObj = this._getTopWithTimeFrame(startDate, endDate);
+		}
+		
+		return returnObj;
+	},
+	
+	_getTopNoTimeFrame: function(){
+		var returnObj = [];
+		var count = 1;
+		var users = new GlideRecord('x_snc_slack_points_slack_user');
+		users.orderByDesc('points');
+		users.query();
+		while(users.next()){
+			returnObj.push({
+				number: count,
+				user: users.getDisplayValue('user'),
+				slack_user: users.getValue('user_name'),
+				sys_user_id: users.getValue('user'),
+				points: users.getValue('points')
+			});
+			count++;
+		}
+		return returnObj;
+	},
+	
+	_getTopWithTimeFrame: function(start, end){
+		var returnObj = [];
+		var count = 1;
+		var points = new GlideAggregate('x_snc_slack_points_point');
+		points.addQuery('date_given','>=',start);
+		points.addQuery('date_given','<=',end);
+		points.addAggregate('COUNT');
+		points.groupBy('target');
+		points.orderByAggregate('COUNT');
+		points.query();
+		while(points.next()){
+			returnObj.push({
+				number: count,
+				user: points.target.user.getDisplayValue(),
+				slack_user: points.target.user_name+'',
+				sys_user_id: points.target.user+'',
+				points: points.getAggregate('COUNT')
+			});
+			count++;
+		}
+		return returnObj;
+	},
+
+	type: 'PointCalculator'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>josh.nerius</sys_created_by>
         <sys_created_on>2017-08-23 20:18:27</sys_created_on>
         <sys_id>27403dcd13300f00973e70d66144b0db</sys_id>
-        <sys_mod_count>7</sys_mod_count>
+        <sys_mod_count>16</sys_mod_count>
         <sys_name>PointCalculator</sys_name>
         <sys_package display_value="Slack Points Thing" source="x_snc_slack_points">4f6df3c813444f009718b9b76144b02c</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Slack Points Thing">4f6df3c813444f009718b9b76144b02c</sys_scope>
         <sys_update_name>sys_script_include_27403dcd13300f00973e70d66144b0db</sys_update_name>
         <sys_updated_by>Dennis.Bennett</sys_updated_by>
-        <sys_updated_on>2019-05-22 14:12:25</sys_updated_on>
+        <sys_updated_on>2019-05-29 14:49:51</sys_updated_on>
     </sys_script_include>
 </record_update>

@@ -42,6 +42,7 @@
 	matches.forEach(function (t) {
 		var thing = t.replace('++', ''); 
 		thing = thing.trim();
+		var points = 0;
 
 		// Check for self-points
 		if (thing.contains(payloadObject.event.user)) {
@@ -55,29 +56,34 @@
 		grSlackUser.query(); 
 
 		if (grSlackUser.next()) {
-			grSlackUser.points = grSlackUser.points + 1;
-			grSlackUser.update(); 
+			var exSid = grSlackUser.getUniqueValue();
+			points = grSlackUser.points + 1;
+			grSlackUser.points = points;
+			grSlackUser.update();
+			logPoint(exSid,current.getUniqueValue(),payloadObject);
 		} else {
 			var slack = new SlackClient(); 
 			var userInfo = slack.getUserInfo(thing.replace('<', '').replace('>', '').replace('@', ''));
 			if(userInfo.ok){
-				grSlackUser.initialize(); 
+				grSlackUser.initialize();
+				points = 1;
 				grSlackUser.user_id = thing;
 				grSlackUser.user_name = userInfo.user.name;
 				grSlackUser.user_email = userInfo.user.profile.email;
-				grSlackUser.points = 1; 
-				grSlackUser.insert();
+				grSlackUser.points = points; 
+				var newSid = grSlackUser.insert();
+				logPoint(newSid,current.getUniqueValue(),payloadObject);
 			}
 			else{
 				var user_not_found_msg = gs.getMessage('user_not_found_error',thing);
-				sendResponse(user_not_found_msg,gs.getProperty('x_snc_slack_points.post_ephemeral_url'),payloadObject,payloadObject.event.user);
+				sendResponse(gs.urlEncode(user_not_found_msg),gs.getProperty('x_snc_slack_points.post_ephemeral_url'),payloadObject,payloadObject.event.user);
 				return;
 			}
 		}
 
 		//Send new points message
 		var randomMessage = new x_snc_slack_points.RandomMessage();
-		sendResponse(gs.urlEncode(randomMessage.getMessage(thing, grSlackUser.points)),gs.getProperty('x_snc_slack_points.post_message_url'),payloadObject);
+		sendResponse(gs.urlEncode(randomMessage.getMessage(thing,points)),gs.getProperty('x_snc_slack_points.post_message_url'),payloadObject);
 	}); 
 
 	// var userId = payloadObject.event.text.match(/\s?\@?(\S+)\s?\+\+/)[1]; 
@@ -96,7 +102,7 @@
 			bodyString += '&thread_ts=' + gs.urlEncode(payload.event.thread_ts); 
 		}
 		if(user){
-			bodyString += '&user=' + user;
+			bodyString += '&user=' + gs.urlEncode(user);
 		}
 		bodyString += '&text=' + message;
 
@@ -106,6 +112,16 @@
 		var statusCode = response.getStatusCode();
 	}
 
+	function logPoint(userSid,eventSid,payload){
+		var grSlackPoint = new GlideRecord('x_snc_slack_points_point');
+		grSlackPoint.initialize();
+		grSlackPoint.giver = payload.event.user;
+		grSlackPoint.target = userSid;
+		grSlackPoint.source_event = eventSid;
+		grSlackPoint.text = payload.event.text;
+		grSlackPoint.insert();
+	}
+
 })(current, previous);]]></script>
         <sys_class_name>sys_script</sys_class_name>
         <sys_created_by>josh.nerius</sys_created_by>
@@ -113,7 +129,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>f79200dc13444f009718b9b76144b037</sys_id>
-        <sys_mod_count>42</sys_mod_count>
+        <sys_mod_count>48</sys_mod_count>
         <sys_name>Process Points</sys_name>
         <sys_overrides/>
         <sys_package display_value="Slack Points Thing" source="x_snc_slack_points">4f6df3c813444f009718b9b76144b02c</sys_package>
@@ -121,7 +137,7 @@
         <sys_scope display_value="Slack Points Thing">4f6df3c813444f009718b9b76144b02c</sys_scope>
         <sys_update_name>sys_script_f79200dc13444f009718b9b76144b037</sys_update_name>
         <sys_updated_by>Dennis.Bennett</sys_updated_by>
-        <sys_updated_on>2019-05-21 14:07:45</sys_updated_on>
+        <sys_updated_on>2019-05-24 20:05:00</sys_updated_on>
         <template/>
         <when>async</when>
     </sys_script>
